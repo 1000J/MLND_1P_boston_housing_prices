@@ -12157,7 +12157,7 @@ Standard deviation of prices: $165,171.13
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;train_test_split&#39;</span>
@@ -12165,7 +12165,7 @@ Standard deviation of prices: $165,171.13
 
 
 <span class="c1"># TODO: Shuffle and split the data into training and testing subsets</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>  
 
 <span class="c1"># Success</span>
 <span class="k">print</span> <span class="s2">&quot;Training and testing split was successful.&quot;</span>
@@ -13894,6 +13894,8 @@ EZGw8f+yOy6g9UPobwAAAABJRU5ErkJggg==
 <p><strong>Answer: </strong></p>
 <p>Instead of splitting data into training and testing set, cross-validation further splits the training data into training and validataion data.  This allows the validation of the model while fitting it.</p>
 <p>K-fold cross-validation partitions the training set into k equal sized subset.  It uses one of the k subset as a validation data and the remaining k-1 subset as a training data.  It repeats this k times, each time using one of the k subset as a validation data.  The average of the k runs are reported as a final score.</p>
+<p>In sklearn, k-fold cross validation by default split the data sequentially.  To split randomly, one can change the 'shuffle' parameter to be True.</p>
+<p>K-fold cross validation is helpful to grid search, especially if the data set is small.  Every data gets to be in the training k-1 times, and in validation one time.  Because of this, it may pick up additional information missed by running without cross validation, which may not pick-up information that are set apart in the validation data.  In addition, since each data is in validation once, validation data set will always be different from each other.</p>
 <p>When using the grid search technique, there is a risk of overfitting since the parameters are tuned to produce the highest score.  K-fold cross-validation reduces the likelihood of overfitting by validating the data without the test data.</p>
 
 </div>
@@ -14134,10 +14136,11 @@ Predicted selling price for Client 3&#39;s home: $935,263.64
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>Predicted selling price for Client 1's home: $403,800.00
-Predicted selling price for Client 2's home: $223,146.00
-Predicted selling price for Client 3's home: $935,263.64</p>
+<p>Predicted selling price for Client 1's home: \$403,800.00
+Predicted selling price for Client 2's home: \$223,146.00
+Predicted selling price for Client 3's home: \$935,263.64</p>
 <p>Yes, they seem very reasonable.  Of the three, I would expect client 2's house to have the lowest price due to lowest room count, highest neighborhood porverty nad highest student-teacher ratio and client 3's house to have the highest price due to highest room count, lowest neighborhood poverty level and lowest student to teacher ratio.</p>
+<p>The highest priced house in the data set is a little over \$1 mil and the lowest priced house is \$223,000.  The mean was \$454,000 and the median was \$440,000.  I would expect the client 3 house price to be closer to the highest priced house given its characterics (large room size, affluent neightborhood, high student-teacher ratio), and client 2 house price to be closer to minimum price due to its characteristic as well.  Client 1 price should be somewhere in between, and it ended up being near the mean and the median prices.  These checked out, so the three predicted selling price seem reasonable.</p>
 
 </div>
 </div>
